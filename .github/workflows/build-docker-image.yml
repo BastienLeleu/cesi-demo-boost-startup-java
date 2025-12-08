@@ -11,12 +11,13 @@ permissions:
 
 jobs:
   build-and-scan-docker:
-    name: 🐳 Docker Build
+    name: 🐳 Docker Build & Scan
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+      - name: Print MongoDB collection
+        run: echo "############# ${{ vars.MONGODB_COLLECTION_NAME }}"
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -38,7 +39,6 @@ jobs:
           format: 'sarif'
           output: 'trivy-results.sarif'
           severity: 'CRITICAL,HIGH,MEDIUM'
-          trivyignores: .trivyignore
 
       - name: Upload scan results to GitHub Security
         uses: github/codeql-action/upload-sarif@v4
@@ -46,7 +46,6 @@ jobs:
         with:
           sarif_file: trivy-results.sarif
           category: trivy-container-scan
-          trivyignores: .trivyignore
 
       - name: Run Trivy scan (display results)
         uses: aquasecurity/trivy-action@0.27.0
@@ -58,7 +57,7 @@ jobs:
           severity: 'CRITICAL,HIGH'
           trivyignores: .trivyignore
 
-      - name: Run Trivy scan (blocking on vulnerabilities)
+      - name: Run Trivy scan (blocking on non-ignored vulns)
         uses: aquasecurity/trivy-action@0.27.0
         with:
           image-ref: ${{ secrets.DEPLOY_APPLI_NAME }}:${{ github.sha }}
