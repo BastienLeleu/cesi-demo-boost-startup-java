@@ -46,6 +46,7 @@ jobs:
         with:
           sarif_file: trivy-results.sarif
           category: trivy-container-scan
+          trivyignores: .trivyignore
 
       - name: Run Trivy scan (display results)
         uses: aquasecurity/trivy-action@0.27.0
