@@ -3,7 +3,7 @@
 [🏠 Retour au sommaire](README.md) | [Exercice suivant ➡️](Exercice-02.md)
 
 ---
-
+1
 ## 🎯 Objectif
 
 Créer le workflow principal `main-pipeline.yml` qui servira d'orchestrateur. Nous allons le remplir progressivement au fur et à mesure des exercices.
