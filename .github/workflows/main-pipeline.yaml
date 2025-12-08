@@ -19,9 +19,8 @@ jobs:
   # Les jobs seront ajoutés progressivement dans les exercices suivants
   # ═══════════════════════════════════════════════
 
-  placeholder:
-    name: Pipeline Principal - En Construction
-    runs-on: ubuntu-latest
+  build-and-test:
+    uses: ./.github/workflows/build-unit-tests.yml
     steps:
       - name: 📋 Pipeline en construction
         run: |
