@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: demo-java
+  name: cesi1-demo-java    # ← Personnalisé avec votre numéro
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: https://github.com/emanzat/demo-boost-startup-java.git
+    repoURL: https://github.com/BastienLeleu/cesi-demo-boost-startup-java
     targetRevision: HEAD
     path: k8s/appli
   destination:
     server: https://kubernetes.default.svc
-    namespace: cesi1
+    namespace: cesi1    # ← Personnalisé avec votre numéro
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
